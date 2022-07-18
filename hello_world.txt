@@ -1,0 +1,15 @@
+const caesar = function(string, num) {
+
+    let inp_string = string;
+    let caesar_string = '';
+    for (let i = 0; i<string.length;i++){
+        let check_str = inp_string.substr(i,1);
+       if(check_str!==' '){     
+            let inp_val = inp_string.substr(i,1).charCodeAt(0);
+            caesar_string += String.fromCharCode(inp_val+num);
+       }else{
+        caesar_string += ' ';    
+        continue}
+    }
+return caesar_string;
+};
