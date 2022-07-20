@@ -2,14 +2,31 @@ const caesar = function(string, num) {
 
     let inp_string = string;
     let caesar_string = '';
+    let reg = /[^A-Za-z0-9]/;
+
     for (let i = 0; i<string.length;i++){
+        
         let check_str = inp_string.substr(i,1);
-       if(check_str!==' '){     
+        if(reg.test(check_str)==false){     
             let inp_val = inp_string.substr(i,1).charCodeAt(0);
-            caesar_string += String.fromCharCode(inp_val+num);
+            let out_val = inp_val +num;
+            
+            if(out_val>90 && check_str.toUpperCase()==check_str){
+                out_val = (out_val -90)+64;             //decimal ASCII values
+            }else if(out_val >122 && check_str.toLowerCase()==check_str){
+                out_val = (out_val -122)+96;
+            }else if(out_val<65 && check_str.toUpperCase()==check_str){
+                out_val = (out_val-65)+91;
+            }else if(out_val <97 && check_str.toLowerCase()==check_str){
+                out_val = (out_val-97)+121;
+            }
+
+            caesar_string += String.fromCharCode(out_val);
        }else{
-        caesar_string += ' ';    
+        caesar_string += check_str;    
         continue}
     }
 return caesar_string;
 };
+
+caesar('Hello, World!', 75)
